@@ -2,11 +2,11 @@
 - name: download mysql tarball
   get_url:
     url: "{{ download_url }}"
-    dest: "/tmp/{{ tarball }}"
+    dest: "{{ tarball }}"
 
 - name: extract mysql tarball
   unarchive:
-    src: "/tmp/{{ tarball }}"
+    src: "{{ tarball }}"
     dest: "{{ install_path }}"
     delete_after: yes
 
