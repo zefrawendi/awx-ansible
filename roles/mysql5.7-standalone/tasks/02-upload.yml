@@ -1,26 +1,26 @@
 ---
 - name: download mysql tarball
   get_url:
-    url: "{{ mysql.download_url }}"
-    dest: "{{ mysql.tarball }}"
+    url: "{{ download_url }}"
+    dest: "{{ tarball }}"
 
 - name: extract mysql tarball
   unarchive:
-    src: "{{ mysql.tarball }}"
-    dest: "{{ mysql.install_path }}"
+    src: "{{ tarball }}"
+    dest: "{{ install_path }}"
 
 - name: create mysql data directory
   file:
-    path: "{{ mysql.datadir }}"
+    path: "{{ datadir }}"
     state: directory
 
 - name: ln -s mysql
-  shell: ln -s {{ mysql.extractdir }} {{ mysql.basedir }}
+  shell: ln -s {{ extractdir }} {{ basedir }}
   args:
-    chdir: "{{ mysql.install_path }}"
+    chdir: "{{ install_path }}"
 
 - name: upload mysql config file
   template:
     src: my.cnf.j2
-    dest: "{{ mysql.basedir }}/my.cnf"
+    dest: "{{ basedir }}/my.cnf"
     mode: 0644

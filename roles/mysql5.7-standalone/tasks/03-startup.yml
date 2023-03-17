@@ -1,10 +1,10 @@
 ---
 - name: mysql initialize
-  shell: ./mysqld --user={{ mysql.user }} --initialize-insecure
+  shell: ./mysqld --user={{ user }} --initialize-insecure
   args:
-    chdir: "{{ mysql.basedir }}/bin"
+    chdir: "{{ basedir }}/bin"
 
 - name: mysql start
-  shell: ./mysqld_safe --defaults-file="{{ mysql.basedir}}/my.cnf" --user={{ mysql.user }} &
+  shell: ./mysqld_safe --defaults-file="{{ basedir}}/my.cnf" --user={{ user }} &
   args:
-    chdir: "{{ mysql.basedir }}/bin"
+    chdir: "{{ basedir }}/bin"

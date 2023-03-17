@@ -7,14 +7,14 @@ default_character_set = utf8
 
 [mysqld]
 # 数据目录和基本设置
-basedir                  = {{ mysql.basedir }}
-datadir                  = {{ mysql.datadir }}
-tmpdir                   = {{ mysql.datadir }}
-server_id                = {{ mysql.server_id }}
-port                     = {{ mysql.port }}
-socket                   = {{ mysql.datadir }}/mysql.sock
-pid-file                 = {{ mysql.datadir }}/mysql.pid
-log-error                = {{ mysql.datadir }}/mysql-error.log
+basedir                  = {{ basedir }}
+datadir                  = {{ datadir }}
+tmpdir                   = {{ datadir }}
+server_id                = {{ server_id }}
+port                     = {{ port }}
+socket                   = {{ datadir }}/sock
+pid-file                 = {{ datadir }}/pid
+log-error                = {{ datadir }}/mysql-error.log
 skip-name_resolve
 skip-external-locking
 
@@ -24,11 +24,11 @@ collation-server         = utf8_general_ci
 lower_case_table_names   = 1
 
 # 复制和二进制日志设置
-log-bin                  = {{ mysql.datadir }}/mysql-bin
+log-bin                  = {{ datadir }}/mysql-bin
 sync_binlog              = 1
 expire_logs_days         = 7
 binlog_format            = MIXED
-relay-log                = {{ mysql.datadir }}/mysql-relay-bin
+relay-log                = {{ datadir }}/mysql-relay-bin
 sync_relay_log           = 1
 relay-log-info-repository = TABLE
 master-info-repository   = TABLE
@@ -37,8 +37,8 @@ rpl_semi_sync_master_timeout  = 1000 # 1 秒
 rpl_semi_sync_slave_enabled   = 1
 
 # InnoDB 引擎设置
-innodb_buffer_pool_size  = {{ mysql.innodb_buffer_pool_size }}
-innodb_log_file_size     = {{ mysql.innodb_log_file_size }}
+innodb_buffer_pool_size  = {{ innodb_buffer_pool_size }}
+innodb_log_file_size     = {{ innodb_log_file_size }}
 innodb_log_buffer_size   = 32M
 innodb_flush_log_at_trx_commit  = 1
 innodb_flush_method      = O_DIRECT

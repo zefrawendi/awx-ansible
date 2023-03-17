@@ -1,21 +1,21 @@
 ---
-- name: check whether the port {{ mysql.port }} is used
+- name: check whether the port {{ port }} is used
   wait_for:
-    port: "{{ mysql.port }}"
+    port: "{{ port }}"
     state: stopped
     timeout: 1
-    msg: "port {{ mysql.port }} is already used"
+    msg: "port {{ port }} is already used"
 
-- name: echo mysql.install_path
+- name: echo install_path
   debug:
-    msg: "mysql.install_path: {{ mysql.install_path }}"
+    msg: "install_path: {{ install_path }}"
 
 - name: check whether the mysql basedir exist
   wait_for:
-    path: "{{ mysql.basedir }}"
+    path: "{{ basedir }}"
     state: absent
     timeout: 1
-    msg: "mysql basedir {{ mysql.basedir }} is alreday exist"
+    msg: "mysql basedir {{ basedir }} is alreday exist"
 
 - name: check whether the MYSQL_HOME env exist
   wait_for:
