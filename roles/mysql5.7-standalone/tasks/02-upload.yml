@@ -1,17 +1,14 @@
 ---
-- name: 输出当前目录位置
-  debug:
-    msg: "{{ ansible_env.PWD }}"
-
 - name: download mysql tarball
   get_url:
     url: "{{ download_url }}"
-    dest: "."
+    dest: “/tmp/{{ tarball }}”
 
 - name: extract mysql tarball
   unarchive:
-    src: "./{{ tarball }}"
+    src: "/tmp/{{ tarball }}"
     dest: "{{ install_path }}"
+    delete_after: yes
 
 - name: create mysql data directory
   file:
