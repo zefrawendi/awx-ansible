@@ -1,6 +1,0 @@
----
-- include_tasks: "jdk11.yml"
-  when: java_flavor == "jdk11"
-
-- include_tasks: "jdk1.8.yml"
-  when: java_flavor == "jdk1.8"

@@ -1,0 +1,16 @@
+---
+mysql:
+  version: "5.7.41"
+  port: "3306"
+  pass: "123456"
+  install_path: "{{ ansible_user_dir }}"
+  user: "{{ ansible_ssh_user }}"
+  group: "{{ ansible_ssh_user }}"
+  tarball: "mysql-{{ mysql.version }}-linux-glibc2.12-x86_64.tar.gz"
+  extractdir: "mysql-{{ mysql.version }}-linux-glibc2.12-x86_64"
+  download_url: "http://192.168.123.222:8888/api/public/dl/elYTrZaI"
+  basedir: "{{ install_path }}/mysql"
+  datadir: "{{ install_path }}/data"
+  innodb_buffer_pool_size: "{{ (ansible_memtotal_mb * 0.5) | round }}M"
+  innodb_log_file_size: "{{ (ansible_memtotal_mb * 0.1) | round }}M"
+  server_id: "{{ (ansible_default_ipv4.interface | ipaddr('address') | ipaddr('number')) | round }}"

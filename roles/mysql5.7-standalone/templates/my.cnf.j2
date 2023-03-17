@@ -1,0 +1,80 @@
+[mysql]
+no_auto_rehash
+default_character_set = utf8
+
+[client]
+default_character_set = utf8
+
+[mysqld]
+# 数据目录和基本设置
+basedir                  = {{ mysql.basedir }}
+datadir                  = {{ mysql.datadir }}
+tmpdir                   = {{ mysql.datadir }}
+server_id                = {{ mysql.server_id }}
+port                     = {{ mysql.port }}
+socket                   = {{ mysql.datadir }}/mysql.sock
+pid-file                 = {{ mysql.datadir }}/mysql.pid
+log-error                = {{ mysql.datadir }}/mysql-error.log
+skip-name_resolve
+skip-external-locking
+
+# 字符集和校对规则
+character-set-server     = utf8
+collation-server         = utf8_general_ci
+lower_case_table_names   = 1
+
+# 复制和二进制日志设置
+log-bin                  = {{ mysql.datadir }}/mysql-bin
+sync_binlog              = 1
+expire_logs_days         = 7
+binlog_format            = MIXED
+relay-log                = {{ mysql.datadir }}/mysql-relay-bin
+sync_relay_log           = 1
+relay-log-info-repository = TABLE
+master-info-repository   = TABLE
+rpl_semi_sync_master_enabled  = 1
+rpl_semi_sync_master_timeout  = 1000 # 1 秒
+rpl_semi_sync_slave_enabled   = 1
+
+# InnoDB 引擎设置
+innodb_buffer_pool_size  = {{ mysql.innodb_buffer_pool_size }}
+innodb_log_file_size     = {{ mysql.innodb_log_file_size }}
+innodb_log_buffer_size   = 32M
+innodb_flush_log_at_trx_commit  = 1
+innodb_flush_method      = O_DIRECT
+innodb_file_per_table    = 1
+innodb_io_capacity       = 1000
+innodb_io_capacity_max   = 8000
+innodb_lru_scan_depth    = 1000
+innodb_thread_concurrency = 0
+innodb_autoinc_lock_mode = 2
+innodb_lock_wait_timeout = 120
+innodb_print_all_deadlocks = ON
+innodb_read_io_threads   = 20
+innodb_write_io_threads  = 20
+
+# 缓存设置
+back_log                 = 1024
+thread_cache_size        = 64
+read_buffer_size         = 4M
+read_rnd_buffer_size     = 8M
+sort_buffer_size         = 4M
+join_buffer_size         = 32M
+binlog_cache_size        = 2M
+query_cache_type         = 1
+query_cache_size         = 128M
+tmp_table_size           = 1024M
+max_heap_table_size      = 256M
+table_open_cache         = 4096
+key_buffer_size          = 512M
+
+# 连接设置
+max_connect_errors       = 100000
+max_connections          = 10000
+connect_timeout          = 120
+wait_timeout             = 86400
+interactive_timeout      = 86400
+max_allowed_packet       = 16M
+explicit_defaults_for_timestamp = TRUE
+transaction-isolation    = READ-COMMITTED
+sql_mode                 = NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES

@@ -1,0 +1,22 @@
+---
+- name: check whether the MySQL port is used
+  wait_for:
+    port: "{{ mysql_port }}"
+    state: stopped
+    timeout: 1
+    msg: "port {{ mysql_port }} is already used"
+
+- name: check whether the mysql basedir exist
+  wait_for:
+    path: "{{ mysql.basedir }}"
+    state: absent
+    timeout: 1
+    msg: "mysql basedir {{ mysql.basedir }} is alreday exist"
+
+- name: check whether the MYSQL_HOME env exist
+  wait_for:
+    path: "~/.bash_profile"
+    search_regex: "MYSQL_HOME"
+    timeout: 1
+  register: env_exist
+  failed_when: env_exist.elapsed == 0
