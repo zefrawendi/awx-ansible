@@ -2,7 +2,7 @@
 - name: download mysql tarball
   get_url:
     url: "{{ download_url }}"
-    dest: “/{{ tarball }}”
+    dest: “/”
 
 - name: extract mysql tarball
   unarchive:
