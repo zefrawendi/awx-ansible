@@ -1,7 +1,6 @@
 ---
-- include_tasks: 01.precheck.yml
-- include_tasks: upload.yml
-- include_tasks: config.yml
-- include_tasks: startup.yml
-- include_tasks: env.yml
-- include_tasks: initdb.yml
+- include_tasks: 01-precheck.yml
+- include_tasks: 02-upload.yml
+- include_tasks: 03-startup.yml
+- include_tasks: 04-setenv.yml
+- include_tasks: 05-initdb.yml
