@@ -1,0 +1,19 @@
+---
+- name: Get tar from master
+  copy:
+    src: /etc/ansible/roles/java/files/openjdk11.tar.gz
+    dest: /usr/lib/jvm/
+    force: no
+    mode: 0644
+
+- name: unzip jdk 11
+  unarchive:
+    src: /usr/lib/jvm/openjdk11.tar.gz
+    dest: /usr/lib/jvm
+    copy: no
+
+- name: remove zip file
+  file:
+    path: /usr/lib/jvm/openjdk11.tar.gz
+    state: absent
+

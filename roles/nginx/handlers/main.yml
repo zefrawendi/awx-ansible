@@ -1,0 +1,10 @@
+---
+- name: start_nginx
+  service:
+    name: "{{ nginx_service }}"
+    state: started
+
+- name: restart_nginx
+  service:
+    name: "{{ nginx_service }}"
+    state: restarted

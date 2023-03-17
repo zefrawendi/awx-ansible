@@ -1,0 +1,8 @@
+---
+nginx_package: nginx
+nginx_service: nginx
+nginx_nobody_user: www-data
+nginx_nobody_group: www-data
+
+
+

@@ -1,0 +1,8 @@
+[all:vars]
+ansible_user=ansible
+ansible_port=22
+
+
+[nd-sample-api]
+13.209.77.252
+
