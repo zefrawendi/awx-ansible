@@ -1,13 +1,9 @@
 ---
-- name: download mysql tarball
-  get_url:
-    url: "{{ download_url }}"
-    dest: "{{ tarball }}"
-
 - name: extract mysql tarball
   unarchive:
-    src: "{{ tarball }}"
+    src: "{{ download_url }}"
     dest: "{{ install_path }}"
+    remote_src: yes
     delete_after: yes
 
 - name: create mysql data directory
