@@ -4,7 +4,6 @@
     src: "{{ download_url }}"
     dest: "{{ install_path }}"
     remote_src: yes
-    delete_after: yes
 
 - name: create mysql data directory
   file:
