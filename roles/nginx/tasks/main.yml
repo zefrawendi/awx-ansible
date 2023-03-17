@@ -1,6 +1,6 @@
 ---
 - name: Install Nginx PKG
-  apt:
+  yum:
     name:  "{{ nginx_package }}"
     state: latest
     update_cache: yes
