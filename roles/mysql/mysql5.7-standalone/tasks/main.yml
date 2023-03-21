@@ -1,0 +1,12 @@
+---
+- name: 安装前预检查 
+  include_tasks: 01-precheck.yml
+
+- name: 上传安装包及配置文件
+  include_tasks: 02-upload.yml
+
+- name: 初始化mysql并启动
+  include_tasks: 03-startup.yml
+
+- name: 配置环境变量及启停脚本
+  include_tasks: 04-setenv.yml

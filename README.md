@@ -1,3 +1,6 @@
-# ansible_awx_demo
+# ansible_awx
 
-HA structured Ansible awx demo
+存放ansible-awx的playbook和roles
+
+目前已包含的roles有：
+- mysql5.7-standalone # 部署mysql5.7单实例

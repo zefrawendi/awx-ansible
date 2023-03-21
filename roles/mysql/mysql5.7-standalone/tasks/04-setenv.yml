@@ -1,0 +1,31 @@
+---
+- name: 配置MYSQL_HOME环境变量
+  lineinfile:
+    path: "~/.bash_profile"
+    regexp: '^\s*export\s*{{ item.key }}=.*$'
+    line: "export {{ item.key }}={{ item.value }}"
+  with_dict:
+    - { "MYSQL_HOME": "{{ basedir }}" }
+    - { "PATH": "$PATH:$MYSQL_HOME/bin" }
+
+- name: 创建mysql启停脚本，，
+  copy:
+    src: "{{ basedir }}/support-files/mysql.server"
+    dest: "{{ install_path }}/mysql_manager.sh"
+    remote_src: yes
+    mode: 0755
+
+- name: 修改启停脚本中basedir和datadir路径
+  lineinfile:
+    path: "{{ install_path }}/mysql_manager.sh"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: "^basedir=", line: "basedir={{ basedir }}" }
+    - { regexp: "^datadir=", line: "datadir={{ datadir }}" }
+
+- name: 修改启停脚本中启动参数
+  replace:
+    path: "{{ install_path }}/mysql_manager.sh"
+    regexp: '--datadir=\"\$datadir\" --pid-file=\"\$mysqld_pid_file_path\"'
+    replace: '--defaults-file="{{ basedir}}/my.cnf" --user={{ user }}'

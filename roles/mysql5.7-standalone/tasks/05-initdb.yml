@@ -1,7 +1,0 @@
----
-- name: grant every host to connection
-  shell: |
-    source ~/.bash_profile
-    ./mysql -uroot -e "use mysql;grant all privileges on *.* to 'root'@'%' identified by '{{ pass }}' with grant option;flush privileges;"
-  args:
-    chdir: "{{ basedir }}/bin"

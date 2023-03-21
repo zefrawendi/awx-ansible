@@ -1,0 +1,29 @@
+---
+- name: mysql初始化
+  shell: ./mysqld --defaults-file={{ basedir }}/my.cnf --user={{ user }} --initialize-insecure
+  args:
+    chdir: "{{ basedir }}/bin"
+
+- name: 启动mysql
+  shell: ./mysqld_safe --defaults-file="{{ basedir}}/my.cnf" --user={{ user }} &
+  args:
+    chdir: "{{ basedir }}/bin"
+
+- name: 检查mysql是否已启动
+  wait_for:
+    port: "{{ mysql_port }}"
+    state: started
+    timeout: 10
+
+- name: 为root用户设置密码，并开启远程访问
+  shell: |
+    source ~/.bash_profile;
+    ./mysql -uroot --socket={{ datadir }}/mysql.sock -e \
+    "
+    USE MYSQL;
+    CREATE USER 'root'@'%' IDENTIFIED BY '{{ mysql_pass }}';
+    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;
+    "
+  args:
+    chdir: "{{ basedir }}/bin"

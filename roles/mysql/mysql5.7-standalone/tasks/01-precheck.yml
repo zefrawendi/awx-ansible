@@ -1,0 +1,21 @@
+---
+- name: 检查端口{{ mysql_port }}是否被占用
+  wait_for:
+    port: "{{ mysql_port }}"
+    state: stopped
+    timeout: 1
+    msg: "端口{{ mysql_port }}已被占用"
+
+- name: 检查{{ basedir }}是否已存在
+  wait_for:
+    path: "{{ basedir }}"
+    state: absent
+    timeout: 1
+    msg: "{{ basedir }}已存在"
+
+- name: 检查{{ datadir }}是否已存在
+  wait_for:
+    path: "{{ datadir }}"
+    state: absent
+    timeout: 1
+    msg: "{{ datadir }}已存在"

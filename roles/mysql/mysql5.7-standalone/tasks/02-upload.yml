@@ -1,21 +1,21 @@
 ---
-- name: extract mysql tarball
+- name: 上传mysql安装包并解压
   unarchive:
     src: "{{ download_url }}"
     dest: "{{ install_path }}"
     remote_src: yes
 
-- name: create mysql data directory
+- name: 创建mysql数据目录
   file:
     path: "{{ datadir }}"
     state: directory
 
-- name: ln -s mysql
+- name: 创建到mysql安装目录的软连接
   shell: ln -s {{ extractdir }} {{ basedir }}
   args:
     chdir: "{{ install_path }}"
 
-- name: upload mysql config file
+- name: 上传my.cnf
   template:
     src: my.cnf.j2
     dest: "{{ basedir }}/my.cnf"

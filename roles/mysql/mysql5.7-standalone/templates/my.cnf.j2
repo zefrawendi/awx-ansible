@@ -11,8 +11,8 @@ basedir                  = {{ basedir }}
 datadir                  = {{ datadir }}
 tmpdir                   = {{ datadir }}
 server_id                = {{ server_id }}
-port                     = {{ port }}
-socket                   = {{ datadir }}/sock
+port                     = {{ mysql_port }}
+socket                   = {{ datadir }}/mysql.sock
 pid-file                 = {{ datadir }}/pid
 log-error                = {{ datadir }}/mysql-error.log
 skip-name_resolve
@@ -32,9 +32,6 @@ relay-log                = {{ datadir }}/mysql-relay-bin
 sync_relay_log           = 1
 relay-log-info-repository = TABLE
 master-info-repository   = TABLE
-rpl_semi_sync_master_enabled  = 1
-rpl_semi_sync_master_timeout  = 1000 # 1 秒
-rpl_semi_sync_slave_enabled   = 1
 
 # InnoDB 引擎设置
 innodb_buffer_pool_size  = {{ innodb_buffer_pool_size }}
