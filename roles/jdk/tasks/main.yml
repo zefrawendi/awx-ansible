@@ -1,0 +1,9 @@
+---
+- name: 安装前预检查 
+  include_tasks: 01-precheck.yml
+
+- name: 上传jdk二进制包
+  include_tasks: 02-upload.yml
+
+- name: 配置环境变量
+  include_tasks: 03-setenv.yml

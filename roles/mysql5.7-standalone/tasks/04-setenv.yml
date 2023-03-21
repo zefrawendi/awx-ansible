@@ -1,14 +1,14 @@
 ---
 - name: 配置MYSQL_HOME环境变量
-  lineinfile:
-    path: "~/.bash_profile"
-    regexp: '^\s*export\s*{{ item.key }}=.*$'
-    line: "export {{ item.key }}={{ item.value }}"
-  with_dict:
-    - { "MYSQL_HOME": "{{ basedir }}" }
-    - { "PATH": "$PATH:$MYSQL_HOME/bin" }
+  blockinfile:
+    path: ~/.bash_profile
+    block: |
+    
+      # Set MYSQL environment variables
+      export MYSQL_HOME={{ basedir }}
+      export PATH=$PATH:$MYSQL_HOME/bin
 
-- name: 创建mysql启停脚本，，
+- name: 创建mysql启停脚本
   copy:
     src: "{{ basedir }}/support-files/mysql.server"
     dest: "{{ install_path }}/mysql_manager.sh"

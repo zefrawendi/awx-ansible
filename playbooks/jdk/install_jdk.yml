@@ -3,5 +3,5 @@
   become: yes
 
   roles:
-    - mysql5.7-standalone
-
+    - jdk
+ 

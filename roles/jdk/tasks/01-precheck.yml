@@ -1,0 +1,7 @@
+---
+- name: 检查是否已经安装了jdk
+  command: "java -version"
+  register: java_version
+  environment:
+    PATH: "{{ ansible_env.PATH }}:{{ java_home }}/bin"
+  failed_when: java_version.rc == 0

@@ -1,0 +1,12 @@
+---
+- name: 创建jdk安装目录{{ install_path }}
+  file:
+    path: "{{ install_path }}"
+    state: directory
+    mode: 0755
+
+- name: 上传{{ tarball }}到{{ install_path }}并解压
+  unarchive:
+    src: "{{ download_url }}"
+    dest: "{{ install_path }}"
+    remote_src: yes

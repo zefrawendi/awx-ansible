@@ -1,0 +1,16 @@
+---
+# jdk版本
+version: 8
+subversion: 361
+
+# jdk二进制包的下载地址
+download_url: "http://192.168.123.222/jdk/{{ tarball }}"
+
+# jdk安装路径
+install_path: "/usr/local/java"
+
+# jdk安装后的目录【不要修改】
+java_home: "{{ install_path }}/jdk1.{{ version }}.0_{{ subversion }}"
+
+# jdk二进制包的名称【不要修改】
+tarball: "jdk-{{ version }}u{{ subversion }}-linux-x64.tar.gz"
