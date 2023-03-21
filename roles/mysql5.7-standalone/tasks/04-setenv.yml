@@ -3,10 +3,9 @@
   blockinfile:
     path: ~/.bash_profile
     block: |
-    
-      # Set MYSQL environment variables
       export MYSQL_HOME={{ basedir }}
       export PATH=$PATH:$MYSQL_HOME/bin
+    marker: "# {mark} MYSQL_HOME environment variable BLOCK"
 
 - name: 创建mysql启停脚本
   copy:

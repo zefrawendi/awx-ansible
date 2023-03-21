@@ -3,8 +3,6 @@
   blockinfile:
     path: "~/.bash_profile"
     block: |
-
-      # Set JAVA_HOME environment variable
       export JAVA_HOME={{ java_home }}
       export PATH=$PATH:$JAVA_HOME/bin
     marker: "# {mark} JAVA_HOME environment variable BLOCK"
