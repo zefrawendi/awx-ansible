@@ -17,4 +17,4 @@
     tarball: "mysql-{{ mysql_version }}-linux-glibc2.12-x86_64.tar.gz"  # mysql二进制包的名称
     extractdir: "mysql-{{ mysql_version }}-linux-glibc2.12-x86_64"      # mysql二进制包解压后的目录名称
   roles:
-    - mysql5.7-standalone
+    - mysql/mysql5.7-standalone
